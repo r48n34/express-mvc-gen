@@ -62,8 +62,7 @@ export const ${lowerName}Router = express.Router();
 ${lowerName}Router.get('/login', ${lowerName}Controller.login);`
     }]
 
-        const dir = __dirname + `/${routeName}Route`;
-        console.log(dir)
+        const dir = path.join(process.cwd(), `${routeName}Route`);
 
         const existsDir = util.promisify(fs.exists);
         const mkdirSync = util.promisify(fs.mkdir);
@@ -84,7 +83,7 @@ ${lowerName}Router.get('/login', ${lowerName}Controller.login);`
                 else {
                     console.log(`${val.fileName} written success.`);
                 }
-             });
+            });
         }
     
     }

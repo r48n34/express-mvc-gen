@@ -71,8 +71,7 @@ export const ${lowerName}Router = express.Router();
 ${lowerName}Router.get('/login', ${lowerName}Controller.login);`
                 }
             ];
-            const dir = __dirname + `/${routeName}Route`;
-            console.log(dir);
+            const dir = path_1.default.join(process.cwd(), `${routeName}Route`);
             const existsDir = util_1.default.promisify(fs_1.default.exists);
             const mkdirSync = util_1.default.promisify(fs_1.default.mkdir);
             const currentDirExist = yield existsDir(dir);
