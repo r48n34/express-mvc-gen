@@ -1,10 +1,14 @@
 import fs from 'fs';
-import util from 'util';
 import path from 'path';
+import { cyan, green, lightRed, yellow } from "kolorist";
 
-export async function generateFolderRoute(routeName : string){
+export function generateFolderRoute(routeName : string){
 
     try{
+
+        if(!routeName){
+            throw new Error("Missing file name");
+        }
 
         const upperName = routeName.charAt(0).toUpperCase() + routeName.slice(1);
         const lowerName = routeName.charAt(0).toLowerCase() + routeName.slice(1);
@@ -14,8 +18,10 @@ export async function generateFolderRoute(routeName : string){
         fileName: upperName + "Service.ts",
         content: 
 `import { Knex } from 'knex';
+
 export class ${upperName}Service {
     constructor(private knex: Knex) {}
+    
     async getUser(): Promise<object[]> {
         return await this.knex.select('*').from('users');
     }
@@ -64,31 +70,31 @@ ${lowerName}Router.get('/login', ${lowerName}Controller.login);`
 
         const dir = path.join(process.cwd(), `${routeName}Route`);
 
-        const existsDir = util.promisify(fs.exists);
-        const mkdirSync = util.promisify(fs.mkdir);
-    
-        const currentDirExist = await existsDir(dir);
+        const currentDirExist = fs.existsSync(dir);
         if (!currentDirExist) {
-            await mkdirSync(dir);
-            console.log(`Directory ${routeName}Route Created.`);
-            console.log(`Remember to add the regarding route to route.ts!`);
+            fs.mkdirSync(dir);
+            console.log(cyan(`Directory ${routeName}Route Created.`));
+            console.log(cyan(`Remember to add the regarding route to route.ts!\n`));
+        }
+        else{
+            throw new Error("Folder already exist.")
         }
     
         for(let val of generateArr){
-            fs.writeFile( path.join(dir, val.fileName) , val.content, (err) => {
-                if (err){
-                    console.log(err);
-                    throw new Error("Error while creating files");
-                }
-                else {
-                    console.log(`${val.fileName} written success.`);
-                }
-            });
+            try {
+                const filePath = path.join(dir, val.fileName);
+
+                fs.writeFileSync( filePath, val.content );
+                console.log(yellow(val.fileName), green("success to create in"), yellow(filePath) );
+            } 
+            catch (error) {
+                console.log(`Error while creating ${val.fileName}`);
+            }
         }
     
     }
     catch(err:any){
-        console.log(err);
+        console.log(lightRed(err));
         return;
     }
 }

@@ -1,21 +1,18 @@
 #!/usr/bin/env node
 
-import yargs from 'yargs/yargs';
+import minimist from 'minimist'
 import { generateFolderRoute } from './utilis/routeBuilder';
 
-const parser = yargs(process.argv.slice(2)).options({
-    n: {
-        type: 'string',
-        describe: 'route name',
-        alias: 'name',
-    },
-});
+interface InputArg {
+    n?: string, // template
+    name?: string
+}
 
 (async () => {
     console.log(`express-mvc-gen`);
-    const argv = await parser.argv;
+    const args = minimist<InputArg>(process.argv.slice(2), { string: ['_'] });
 
-    const routeName = argv.n;
+    const routeName = args.n || args.name || null
 
     if (routeName) {
         generateFolderRoute(routeName);
