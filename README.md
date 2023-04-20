@@ -4,7 +4,7 @@ Generate express-mvc-gen by typing with CLI.
 <p align="left">
 
 <a href="https://www.npmjs.com/package/express-mvc-gen"> <img src="https://img.shields.io/npm/v/express-mvc-gen" /> </a>
-<!-- <a href="https://github.com/r48n34/express-mvc-gen"><img src="https://img.shields.io/github/actions/workflow/status/r48n34/express-mvc-gen/test.yml" /></a> -->
+<a href="https://github.com/r48n34/express-mvc-gen"><img src="https://img.shields.io/github/actions/workflow/status/r48n34/express-mvc-gen/test.yml" /></a>
 
 </p>
 
