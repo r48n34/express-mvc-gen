@@ -1,4 +1,4 @@
-# express-mvc-gen
+# 💡 express-mvc-gen
 Generate express-mvc-gen by typing with CLI.
 
 <p align="left">
@@ -8,17 +8,17 @@ Generate express-mvc-gen by typing with CLI.
 
 </p>
 
-### Features
+### 💡 Features
 1. Genetate MVC like route in express.js  
 2. Assume using knex for query builder
 3. Typescript first class generate
 
-### Setup / Install:
+### 🚀 Setup / Install
 ```
 npm i -g express-mvc-gen
 ```
 
-### Usage:
+### 🤔 Usage
 ```
 emg -n your_route_name  
 
@@ -32,10 +32,7 @@ Output
 ├── BananaRoute.ts  
 ```
 
-#### Dev logs
-
+#### 📝 Dev logs
 #### - 1.1.0
 1. Better cli performances compare to older version.
 2. Adding smart color in cli.
-
-
